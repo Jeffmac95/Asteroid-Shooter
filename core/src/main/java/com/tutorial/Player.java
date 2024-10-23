@@ -24,6 +24,7 @@ class Player {
     }
 
     public void update(float deltaTime, ArrayList<Sprite> bullets) {
+
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             position.x -= deltaTime * speed;
         } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {

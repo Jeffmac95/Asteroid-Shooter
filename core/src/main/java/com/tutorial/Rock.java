@@ -3,6 +3,7 @@ package com.tutorial;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
@@ -16,11 +17,15 @@ public class Rock {
     public Vector2 position;
     public float speed;
     public RockType rockType;
-    public float rockSize;
+    public float rockSize = 32;
+    public Rectangle rockRectangle;
+    public static ArrayList<Sprite> bullets;
 
     public Rock(TextureAtlas atlas, RockType rockType, float startX, float startY) {
 
         position = new Vector2(startX, startY);
+        rockRectangle = new Rectangle(position.x, position.y, rockSize, rockSize);
+        bullets = new ArrayList<>();
 
         switch (rockType) {
             case SMALL:
@@ -51,13 +56,21 @@ public class Rock {
     }
 
     public void draw(SpriteBatch spriteBatch) {
-
         rockSprite.draw(spriteBatch);
     }
 
     public boolean isOffScrn() {
         return position.y + rockSprite.getHeight() < 0;
+    }
 
+    public void updateRectangle() {
+        rockRectangle.setPosition(position.x, position.y);
+    }
+
+    public void checkCollision(Rectangle bulletRectangle, Rock rock) {
+        if (rock.rockRectangle.overlaps(bulletRectangle)) {
+            System.out.println("rock and bullet collision");
+        }
     }
 
 }

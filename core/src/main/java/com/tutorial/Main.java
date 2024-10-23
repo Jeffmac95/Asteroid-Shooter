@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -35,8 +36,11 @@ public class Main extends ApplicationAdapter {
     public float spawnTimer;
     public Random random;
     public Sprite bullet;
+    public int bulletWidth = 32;
+    public int bulletHeight = 32;
     public Vector2 bulletPosition;
     public ArrayList<Sprite> bullets;
+    public Rectangle bulletRectangle;
 
 
 
@@ -54,7 +58,7 @@ public class Main extends ApplicationAdapter {
         bullet = new Sprite(new Texture("bullet.png"));
         bulletPosition = new Vector2();
         bullets = new ArrayList<>();
-
+        bulletRectangle = new Rectangle(bulletPosition.x, bulletPosition.y, bulletWidth, bulletHeight);
     }
 
     @Override
@@ -77,7 +81,10 @@ public class Main extends ApplicationAdapter {
         while (iterator.hasNext()) {
             Rock rock = iterator.next();
             rock.update(deltaTime);
+            rock.updateRectangle();
             rock.draw(spriteBatch);
+
+            rock.checkCollision(bulletRectangle, rock);
 
             if (rock.isOffScrn()) {
                 iterator.remove();
@@ -88,6 +95,8 @@ public class Main extends ApplicationAdapter {
         while (bulletIterator.hasNext()) {
             Sprite bullet = bulletIterator.next();
             bullet.setY(bullet.getY() + deltaTime * player.speed);
+
+            bulletRectangle.setPosition(bullet.getX(), bullet.getY());
 
             if (bullet.getY() > HEIGHT) {
                 bulletIterator.remove();
