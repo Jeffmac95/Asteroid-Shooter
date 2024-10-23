@@ -1,0 +1,11 @@
+game_atlas.png
+size:256,128
+repeat:none
+lrgrock
+bounds:74,54,60,60
+medrock
+bounds:2,2,40,40
+rocket
+bounds:2,44,70,70
+smRock
+bounds:136,82,32,32

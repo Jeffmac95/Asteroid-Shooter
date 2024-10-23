@@ -1,0 +1,23 @@
+
+buttonstyle.png
+size: 64, 64
+format: RGBA8888
+repeat: none
+playbutton
+  rotate: false
+  xy: 1, 1
+  size: 32, 32
+  split: 1, 1, 12, 13
+  pad: 0, 0, 0, 0
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+playbuttondown.9
+  rotate: false
+  xy: 1, 1
+  size: 32, 32
+  split: 0, 0, 11, 12
+  pad: 0, 0, 0, 0
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
